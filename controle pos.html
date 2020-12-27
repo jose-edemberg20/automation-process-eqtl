@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <title>P.O.S</title>
+  </head>
+  <body>
+  <div id="app">
+    <!--MENU SUPERIOR-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Controle do P.O.S</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!--CONTEUDO DA PÁGINA-->
+    <div class="container">
+      
+      <br>
+      <div class="row">
+        <div class="col-4">
+          <div class="card">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">50</h2>
+                <h6 class="card-subtitle mb-2 text-muted">Maquinetas Cadastradas</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="card">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">40</h2>
+                <h6 class="card-subtitle mb-2 text-muted">Maquinetas Alocadas</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="card">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">5</h2>
+                <h6 class="card-subtitle mb-2 text-muted">Maquinetas Substituídas</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-light btn-sm" type="button" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#registrar-maquineta">Registrar Maquineta</button>
+            <button class="btn btn-light btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#movimentacao">Movimentação</button>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">base</th>
+                <th scope="col">estrutura</th>
+                <th scope="col">equipes</th>
+                <th scope="col">responsável</th>
+                <th scope="col">status</th>
+                <th scope="col">ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>
+                  <button class="btn btn-sm btn-light"><i class="fas fa-pen"></i></button>
+                  <button class="btn btn-sm btn-light"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>
+                  <button class="btn btn-sm btn-light"><i class="fas fa-pen"></i></button>
+                  <button class="btn btn-sm btn-light"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!--MODAL DE CADASTRO DA MAQUINETA-->
+    <div class="modal fade" id="registrar-maquineta" tabindex="-1" aria-labelledby="registrar-maquineta" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registrar-maquineta">Registrar Maquineta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-2">
+                <label for="motivo" class="form-label"><item-req></item-req>Motivo</label>
+                <select class="form-select" aria-label="Motivo" id="motivo" v-model="formNovaMaquineta.selecaoMotivo">
+                  <option selected value="1">Novo cadastro</option>
+                  <option value="2">Substituição</option>
+                  <option value="3">Outro</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label for="cod-pdv" class="form-label"><item-req></item-req>Código PDV</label>
+                <input type="text" class="form-control" id="cod-pdv" v-model="formNovaMaquineta.codPdv">
+              </div>
+              <div class="mb-2" v-if="formNovaMaquineta.selecaoMotivo==2">
+                <label for="cod-pdv-ant" class="form-label">Código PDV Anterior</label>
+                <input type="text" class="form-control" id="cod-pdv-ant" v-model="formNovaMaquineta.codPdvAnt">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary btn-sm" @click="inserirNovaMaquineta">Inserir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--MODAL DE MOVIMENTAÇÃO DA MAQUINETA-->
+    <div class="modal fade" id="movimentacao" tabindex="-1" aria-labelledby="movimentacao" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="movimentacao">Registrar Movimentação</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-2">
+                <label for="cod-maq" class="form-label">Maquineta</label>
+                <input class="form-control" list="datalistOptions" id="txt-cod-maq">
+                <datalist id="datalistOptions">
+                  <option value="AT001">
+                  <option value="AT002">
+                  <option value="AT003">
+                  <option value="AT004">
+                  <option value="AT005">
+                </datalist>
+              </div>
+              <div class="mb-2">
+                <label for="base" class="form-label">Base</label>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected></option>
+                  <option value="1">Maceió</option>
+                  <option value="2">Penedo</option>
+                  <option value="3">Arapiraca</option>
+                  <option value="4">Matriz do Camaragibe</option>
+                  <option value="5">União</option>
+                  <option value="6">Rio Largo</option>
+                  <option value="7">São Miguel dos Campos</option>
+                  <option value="8">Palmeira dos Índios</option>
+                  <option value="9">Delmiro Goveia</option>
+                  <option value="10">Santana do Ipanema</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label for="estrutura" class="form-label">Estrutura</label>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected></option>
+                  <option value="1">Corte</option>
+                  <option value="2">CNR</option>
+                  <option value="3">PCR</option>
+                  <option value="4">Relacionamento</option>
+                  <option value="5">Seed Money</option>
+                  <option value="6">VRC</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label for="equipe" class="form-label">Equipe</label>
+                <input type="text" class="form-control" id="equipe">
+              </div>
+              <div class="mb-2">
+                <label for="responsavel" class="form-label">Responsável</label>
+                <input type="text" class="form-control" id="responsavel">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary btn-sm">Inserir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+      const app = {
+        data(){
+          return{
+            formNovaMaquineta:{
+              selecaoMotivo:'',
+              codPdv:'',
+              codPdvAnt:''
+            }
+          }
+        },
+        methods:{
+          inserirNovaMaquineta(){
+            if(this.formNovaMaquineta.selecaoMotivo && this.formNovaMaquineta.codPdv){
+              console.log('Campos preenchidos')
+            } else {
+              console.log('Campos não preenchidos')
+            }
+          }
+        }
+      }
+
+      const vue = Vue.createApp(app);
+
+      vue.component('item-req',{
+        props:['show'],
+        template: `<span class="text-danger" title="item de preenchimento obrigatório" style="margin-right:2px;">•</span>`
+      })
+
+      vue.mount('#app');
+      
+    </script>
+  </body>
+</html>
